@@ -21,12 +21,12 @@ namespace efCoreException.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Example>> Get()
         {
-            return _context.Example.Where(e => IsReferencedAndStartsWithB(e)).ToList();
+            return _context.Example.Where(IsReferencedAndStartsWithB()).ToList();
         }
 
-        private bool IsReferencedAndStartsWithB(Example example)
+        private Expression<Func<Example, bool>> IsReferencedAndStartsWithB()
         {
-            return example.IsReferenced && example.ReferenceName.StartsWith("B");
+            return e => e.IsReferenced && e.ReferenceName.StartsWith("B");
         }
     }
 }
