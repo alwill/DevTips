@@ -29,7 +29,8 @@ namespace efCoreException
         {
             services.AddDbContext<EfExceptionContext>(options =>
             {
-                options.UseSqlServer(Configuration["Database:EfExceptionConnection"]);
+                options.UseSqlServer(Configuration["Database:EfExceptionConnection"])
+                .ConfigureWarnings(warn => warn.Throw(RelationalEventId.QueryClientEvaluationWarning));
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
