@@ -17,8 +17,15 @@ namespace EfCoreInMemoryTests.Tests
         {
             var dbContextOptions = new DbContextOptionsBuilder<ExampleContext>().UseInMemoryDatabase("Test");
             _context = new ExampleContext(dbContextOptions.Options);
+            _context.Database.EnsureCreated();
             
             _createCustomerService = new CreateCustomerService(_context);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _context.Database.EnsureDeleted();
         }
 
         [Test]
