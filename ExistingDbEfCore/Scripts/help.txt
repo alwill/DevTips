@@ -1,0 +1,5 @@
+dotnet new webapi -n ExistingDbScaffold
+dotnet restore
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet restore
+dotnet ef dbcontext scaffold "Db Connection String" Microsoft.EntityFrameworkCore.SqlServer -c ExistingDbContext -o Data
