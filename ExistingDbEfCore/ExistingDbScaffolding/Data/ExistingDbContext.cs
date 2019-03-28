@@ -14,6 +14,12 @@ namespace ExistingDbScaffolding.Data
             : base(options)
         {
         }
+        
+        protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+        {
+            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=ExistingScaffold;User=sa;Password=ArchitectNow!;");
+            base.OnConfiguring(optionsBuilder);
+        }
 
         public virtual DbSet<Item> Item { get; set; }
         public virtual DbSet<Order> Order { get; set; }
